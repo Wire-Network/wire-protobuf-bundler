@@ -5,9 +5,9 @@
   "private": false,
   "type": "module",
   "types": "lib/index.d.ts",
-  "module": "dist/bundle/protobuf-bundler.mjs",
+  "module": "dist/bundle/wire-protobuf-bundler.mjs",
   "bin": {
-    "protobuf-bundler": "dist/bin/protobuf-bundler.mjs"
+    "wire-protobuf-bundler": "dist/bin/wire-protobuf-bundler.mjs"
   },
   "scripts": {
     "build": "tsc -b tsconfig.json",
@@ -15,7 +15,7 @@
     "bundle": "node esbuild.config.js",
     "bundle:dev": "node esbuild.config.js -w",
     "dev": "concurrently npm:build:dev npm:bundle:dev",
-    "dist": "pnpm build && pnpm bundle && pkg -c package.json --output dist/bin/protobuf-bundler -d --options experimental-require-module dist/bundle/protobuf-bundler.mjs",
+    "dist": "pnpm build && pnpm bundle && pkg -c package.json --output dist/bin/wire-protobuf-bundler -d --options experimental-require-module dist/bundle/wire-protobuf-bundler.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "clean": "rm -rf lib dist",
     "postinstall": "npm run dist"

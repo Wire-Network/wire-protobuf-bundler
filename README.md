@@ -14,19 +14,19 @@ CLI tool that fetches `.proto` files from a GitHub repository, runs `protoc` wit
 ## Installation
 
 ```bash
-npm install -g @wireio/protobuf-bundler
+npm install -g @wireio/wire-protobuf-bundler
 ```
 
 Or use directly with npx:
 
 ```bash
-npx @wireio/protobuf-bundler --help
+npx @wireio/wire-protobuf-bundler --help
 ```
 
 ## Usage
 
 ```
-protobuf-bundler --repo <repo> --target <target> --output <dir> --package-name <name>
+wire-protobuf-bundler --repo <repo> --target <target> --output <dir> --package-name <name>
 ```
 
 ### Options
@@ -45,7 +45,7 @@ protobuf-bundler --repo <repo> --target <target> --output <dir> --package-name <
 Generate a Rust crate:
 
 ```bash
-protobuf-bundler \
+wire-protobuf-bundler \
     --repo 'Wire-Network/wire-sysio/libraries/opp#feature/protobuf-support-for-opp' \
     --target solana \
     --output build/generated/solana \
@@ -55,21 +55,23 @@ protobuf-bundler \
 Generate an npm package:
 
 ```bash
-protobuf-bundler \
+wire-protobuf-bundler \
     --repo 'Wire-Network/wire-sysio/libraries/opp#feature/protobuf-support-for-opp' \
     --target solidity \
     --output build/generated/solidity \
-    --package-name '@wireio/opp-solidity-models'
+    --package-name '@wireio/opp-solidity-models' \
+    --package-version 1.0.0
 ```
 
 With additional package metadata:
 
 ```bash
-protobuf-bundler \
-    --repo 'Wire-Network/wire-sysio/libraries/opp#feature/protobuf-support-for-opp' \
+wire-protobuf-bundler \
+    --repo 'Wire-Network/wire-sysio/libraries/opp/proto#feature/protobuf-support-for-opp' \
     --target solana \
     --output build/generated/solana \
     --package-name 'wire-opp-solana-models' \
+    --package-version 1.0.0 \
     --package-data '{ "version": "1.0.0", "license": "MIT" }'
 ```
 

@@ -27,7 +27,7 @@ const ctx = await esbuild.context({
   platform: "node",
   target: "node24",
   format: "esm",
-  outfile: "dist/bundle/protobuf-bundler.mjs",
+  outfile: "dist/bundle/wire-protobuf-bundler.mjs",
   sourcemap: true,
   minify: false,
   banner: {

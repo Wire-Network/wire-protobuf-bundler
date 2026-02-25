@@ -7,8 +7,8 @@ CLI tool: `protobuf-bundler`
 ```bash
 pnpm install          # Install dependencies
 pnpm build            # tsc → lib/
-pnpm bundle           # esbuild → dist/bundle/protobuf-bundler.mjs
-pnpm dist             # build + bundle + pkg → dist/bin/protobuf-bundler
+pnpm bundle           # esbuild → dist/bundle/wire-protobuf-bundler.mjs
+pnpm dist             # build + bundle + pkg → dist/bin/wire-protobuf-bundler
 pnpm dev              # Watch mode (build + bundle concurrent)
 pnpm format           # Prettier on src/
 pnpm clean            # rm -rf lib dist
