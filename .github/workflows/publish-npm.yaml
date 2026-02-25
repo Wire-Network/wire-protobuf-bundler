@@ -1,52 +1,75 @@
-name: Publish to npm
+# .github/workflows/release-patch-publish.yml
+name: Release (patch) + Publish (pnpm)
 
 on:
   push:
     branches:
       - master
-  workflow_dispatch:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write # needed to push the version-bump commit
+  id-token: none
+
+concurrency:
+  group: release-master
+  cancel-in-progress: false
 
 jobs:
-  publish:
+  release:
+    # Prevent the workflow from running on its own bump commit
+    if: >
+      github.actor != 'github-actions[bot]' &&
+      !contains(github.event.head_commit.message, '[skip release]')
+
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
+    env:
+      # npm/pnpm will read this for auth when publishing
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "24"
-          registry-url: "https://registry.npmjs.org"
-          cache: "pnpm"
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies
+      - name: Install deps
         run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm run dist
 
-      - name: Configure git
+      - name: Configure git author
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version
-        run: pnpm version patch --no-git-tag-version
-
-      - name: Commit version bump
+      - name: Bump patch versions (workspace)
         run: |
-          git add package.json
-          git commit -m "chore: bump version [skip release]"
+          pnpm version patch --no-git-tag-version
+
+      - name: Commit version bump (skip re-run)
+        run: |
+          if git diff --quiet; then
+            echo "No version changes to commit."
+            exit 0
+          fi
+
+          git add -A
+          git commit -m "chore(release): bump patch [skip release]"
           git push
 
-      - name: Publish
-        run: pnpm -r publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npm (all workspace packages)
+        run: |
+          pnpm -r publish --access public --no-git-checks
