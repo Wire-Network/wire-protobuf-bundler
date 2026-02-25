@@ -1,0 +1,16 @@
+{
+  "name": "{{packageName}}",
+  "version": "{{version}}",
+  "description": "Auto-generated protobuf types for Solidity",
+  "type": "module",
+  "main": "index.mjs",
+  "files": [
+    "contracts",
+    "index.mjs",
+    "README.md"
+  ]{{#if additionalFields}},
+{{#each additionalFields}}
+  "{{@key}}": {{{json this}}}{{#unless @last}},{{/unless}}
+{{/each}}
+{{/if}}
+}
