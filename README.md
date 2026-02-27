@@ -94,7 +94,7 @@ The tool executes a three-step pipeline:
 ├── proto/          # Original .proto source files
 └── src/
     ├── lib.rs      # Barrel file re-exporting all modules
-    ├── *.pb.rs     # Generated protobuf modules
+    ├── *.rs     # Generated protobuf modules
     └── protobuf_runtime.rs
 ```
 

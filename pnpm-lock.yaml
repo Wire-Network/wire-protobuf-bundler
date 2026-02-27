@@ -4,16 +4,21 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@wireio/protoc-gen-solana': link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+  protoc-gen-solidity: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+  '@wireio/protoc-gen-solidity': link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+
 importers:
 
   .:
     dependencies:
       '@wireio/protoc-gen-solana':
-        specifier: ^1.0.3
-        version: 1.0.3
+        specifier: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+        version: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
       '@wireio/protoc-gen-solidity':
-        specifier: ^1.0.4
-        version: 1.0.4
+        specifier: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+        version: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
       '@yao-pkg/pkg':
         specifier: ^6.14.1
         version: 6.14.1
@@ -23,6 +28,9 @@ importers:
       handlebars:
         specifier: ^4.7.8
         version: 4.7.8
+      protoc-gen-solidity:
+        specifier: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+        version: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
       tracer:
         specifier: ^1.3.0
         version: 1.3.0
@@ -261,36 +269,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@protobufjs/aspromise@1.1.2':
-    resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
-
-  '@protobufjs/base64@1.1.2':
-    resolution: {integrity: sha512-AZkcAA5vnN/v4PDqKyMR5lx7hZttPDgClv83E//FMNhR2TMcLUhfRUBHCmSl0oi9zMgDDqRUJkSxO3wm85+XLg==}
-
-  '@protobufjs/codegen@2.0.4':
-    resolution: {integrity: sha512-YyFaikqM5sH0ziFZCN3xDC7zeGaB/d0IUb9CATugHWbd1FRFwWwt4ld4OYMPWu5a3Xe01mGAULCdqhMlPl29Jg==}
-
-  '@protobufjs/eventemitter@1.1.0':
-    resolution: {integrity: sha512-j9ednRT81vYJ9OfVuXG6ERSTdEL1xVsNgqpkxMsbIabzSo3goCjDIveeGv5d03om39ML71RdmrGNjG5SReBP/Q==}
-
-  '@protobufjs/fetch@1.1.0':
-    resolution: {integrity: sha512-lljVXpqXebpsijW71PZaCYeIcE5on1w5DlQy5WH6GLbFryLUrBD4932W/E2BSpfRJWseIL4v/KPgBFxDOIdKpQ==}
-
-  '@protobufjs/float@1.0.2':
-    resolution: {integrity: sha512-Ddb+kVXlXst9d+R9PfTIxh1EdNkgoRe5tOX6t01f1lYWOvJnSPDBlG241QLzcyPdoNTsblLUdujGSE4RzrTZGQ==}
-
-  '@protobufjs/inquire@1.1.0':
-    resolution: {integrity: sha512-kdSefcPdruJiFMVSbn801t4vFK7KB/5gd2fYvrxhuJYg8ILrmn9SKSX2tZdV6V+ksulWqS7aXjBcRXl3wHoD9Q==}
-
-  '@protobufjs/path@1.1.2':
-    resolution: {integrity: sha512-6JOcJ5Tm08dOHAbdR3GrvP+yUUfkjG5ePsHYczMFLq3ZmMkAD98cDgcT2iA1lJ9NVwFd4tH/iSSoe44YWkltEA==}
-
-  '@protobufjs/pool@1.1.0':
-    resolution: {integrity: sha512-0kELaGSIDBKvcgS4zkjz1PeddatrjYcmMWOlAuAPwAeccUrPHdUqo/J6LiymHHEiJT5NrF1UVwxY14f+fy4WQw==}
-
-  '@protobufjs/utf8@1.1.0':
-    resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
-
   '@types/node@24.10.13':
     resolution: {integrity: sha512-oH72nZRfDv9lADUBSo104Aq7gPHpQZc4BTx38r9xf9pg5LfP6EzSyH2n7qFmmxRQXh7YlUXODcYsg6PuTDSxGg==}
 
@@ -299,16 +277,6 @@ packages:
 
   '@types/yargs@17.0.35':
     resolution: {integrity: sha512-qUHkeCyQFxMXg79wQfTtfndEC+N9ZZg76HJftDJp+qH2tV7Gj4OJi7l+PiWwJ+pWtW8GwSmqsDj/oymhrTWXjg==}
-
-  '@wireio/protoc-gen-solana@1.0.3':
-    resolution: {integrity: sha512-TkkMOBPxgj+uAeGfqKzDZrXSVUpoEo5NaQSUYw3zvI4DUPGV/W2jv8VvmRSFk3srkEA+GgXRHG0SQba9Q0tb8Q==}
-    engines: {node: '>=24'}
-    hasBin: true
-
-  '@wireio/protoc-gen-solidity@1.0.4':
-    resolution: {integrity: sha512-bWxUkc5HszA3ezLn/VuLYRSkN87iRkpNWPPNybSsV5eT+65ONPcEJPsm5ZkExiISyT0lWImjNOITChvMRmi+8A==}
-    engines: {node: '>=24'}
-    hasBin: true
 
   '@yao-pkg/pkg-fetch@3.5.32':
     resolution: {integrity: sha512-hS8zzze5VVyVAciZoNX4q3ZmCdn0gi34P2SElk4PFbzkA4LPs7qBJ3LhUKb4d4KGw1HVkFJJOMgGomH7cMqQ5Q==}
@@ -551,9 +519,6 @@ packages:
   jsonfile@6.2.0:
     resolution: {integrity: sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg==}
 
-  long@5.3.2:
-    resolution: {integrity: sha512-mNAgZ1GmyNhD7AuqnTG3/VQ26o760+ZYBPKjPvugO8+nLbYfX6TVpJPseBvopbdY+qpZ/lKUnmEc1LeZYS3QAA==}
-
   mimic-response@3.1.0:
     resolution: {integrity: sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==}
     engines: {node: '>=10'}
@@ -635,10 +600,6 @@ packages:
   progress@2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
-
-  protobufjs@8.0.0:
-    resolution: {integrity: sha512-jx6+sE9h/UryaCZhsJWbJtTEy47yXoGNYI4z8ZaRncM0zBKeRqjO2JEcOUYwrYGb1WLhXM1FfMzW3annvFv0rw==}
-    engines: {node: '>=12.0.0'}
 
   protoc@29.6.0:
     resolution: {integrity: sha512-i5fB21Xex9oPpxDMTQRIyfDMmV4xwAd1EU7YfCTpG4wOlkrhv4Met+kq+JJnVY9pG6nN8yojZiXEbk7Ymk5rHQ==}
@@ -970,29 +931,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@protobufjs/aspromise@1.1.2': {}
-
-  '@protobufjs/base64@1.1.2': {}
-
-  '@protobufjs/codegen@2.0.4': {}
-
-  '@protobufjs/eventemitter@1.1.0': {}
-
-  '@protobufjs/fetch@1.1.0':
-    dependencies:
-      '@protobufjs/aspromise': 1.1.2
-      '@protobufjs/inquire': 1.1.0
-
-  '@protobufjs/float@1.0.2': {}
-
-  '@protobufjs/inquire@1.1.0': {}
-
-  '@protobufjs/path@1.1.2': {}
-
-  '@protobufjs/pool@1.1.0': {}
-
-  '@protobufjs/utf8@1.1.0': {}
-
   '@types/node@24.10.13':
     dependencies:
       undici-types: 7.16.0
@@ -1002,16 +940,6 @@ snapshots:
   '@types/yargs@17.0.35':
     dependencies:
       '@types/yargs-parser': 21.0.3
-
-  '@wireio/protoc-gen-solana@1.0.3':
-    dependencies:
-      protobufjs: 8.0.0
-      tracer: 1.3.0
-
-  '@wireio/protoc-gen-solidity@1.0.4':
-    dependencies:
-      protobufjs: 8.0.0
-      tracer: 1.3.0
 
   '@yao-pkg/pkg-fetch@3.5.32':
     dependencies:
@@ -1282,8 +1210,6 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  long@5.3.2: {}
-
   mimic-response@3.1.0: {}
 
   minimist@1.2.8: {}
@@ -1349,21 +1275,6 @@ snapshots:
   process-nextick-args@2.0.1: {}
 
   progress@2.0.3: {}
-
-  protobufjs@8.0.0:
-    dependencies:
-      '@protobufjs/aspromise': 1.1.2
-      '@protobufjs/base64': 1.1.2
-      '@protobufjs/codegen': 2.0.4
-      '@protobufjs/eventemitter': 1.1.0
-      '@protobufjs/fetch': 1.1.0
-      '@protobufjs/float': 1.0.2
-      '@protobufjs/inquire': 1.1.0
-      '@protobufjs/path': 1.1.2
-      '@protobufjs/pool': 1.1.0
-      '@protobufjs/utf8': 1.1.0
-      '@types/node': 24.10.13
-      long: 5.3.2
 
   protoc@29.6.0: {}
 
