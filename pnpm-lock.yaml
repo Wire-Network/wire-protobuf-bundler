@@ -5,20 +5,20 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@wireio/protoc-gen-solana': link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+  '@wireio/protoc-gen-solana': link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+  '@wireio/protoc-gen-solidity': link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
   protoc-gen-solidity: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
-  '@wireio/protoc-gen-solidity': link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
 
 importers:
 
   .:
     dependencies:
       '@wireio/protoc-gen-solana':
-        specifier: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
-        version: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+        specifier: link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+        version: link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
       '@wireio/protoc-gen-solidity':
-        specifier: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
-        version: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+        specifier: link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+        version: link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
       '@yao-pkg/pkg':
         specifier: ^6.14.1
         version: 6.14.1
@@ -28,9 +28,9 @@ importers:
       handlebars:
         specifier: ^4.7.8
         version: 4.7.8
-      protoc-gen-solidity:
-        specifier: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
-        version: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+      protoc:
+        specifier: ^29.6.0
+        version: 29.6.0
       tracer:
         specifier: ^1.3.0
         version: 1.3.0
@@ -50,9 +50,6 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
-      protoc:
-        specifier: ^29.6.0
-        version: 29.6.0
       typescript:
         specifier: ^5.9.3
         version: 5.9.3

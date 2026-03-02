@@ -5,6 +5,6 @@ onlyBuiltDependencies:
   - protobufjs
 
 overrides:
-  '@wireio/protoc-gen-solana': link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
-  '@wireio/protoc-gen-solidity': link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
+  '@wireio/protoc-gen-solana': link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solana
+  '@wireio/protoc-gen-solidity': link:../../../../../home/jglanz/.local/share/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity
   protoc-gen-solidity: link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity

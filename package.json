@@ -38,7 +38,7 @@
     "@yao-pkg/pkg": "^6.14.1",
     "degit": "^2.8.4",
     "handlebars": "^4.7.8",
-    "protoc-gen-solidity": "link:../../../Library/pnpm/global/5/node_modules/@wireio/protoc-gen-solidity",
+    "protoc": "^29.6.0",
     "tracer": "^1.3.0",
     "yargs": "^17.7.2"
   },
@@ -47,7 +47,6 @@
     "@types/yargs": "^17.0.33",
     "esbuild": "^0.27.3",
     "prettier": "^3.8.1",
-    "protoc": "^29.6.0",
     "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@10.30.2",
