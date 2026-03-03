@@ -182,14 +182,22 @@ export async function generateTypescript(
   const tmpNodeModules = Path.join(outputDir, "node_modules")
   
   const cleanupNodeModules = (nmDir: string) => {
+    try {
     if (Fs.existsSync(nmDir)) {
       log.info("Removing existing node_modules at %s", nmDir)
       if (Fs.lstatSync(nmDir).isSymbolicLink()) {
-        Fs.rmSync(nmDir)
+        Fs.unlinkSync(nmDir)
+        if (Fs.existsSync(nmDir)) {
+          log.warn("Symlink removal failed, attempting force delete: %s", nmDir)
+          Fs.rmSync(nmDir, { recursive: true, force: true })
+        }
       } else {
-        Fs.rmSync(nmDir, { recursive: true, force: true })
+        Fs.rmdirSync(nmDir, { recursive: true })
       }
     }
+  } catch (err) {
+    log.warn(`Failed to clean up node_modules at: ${nmDir}`, err)
+  }
   }
   
   cleanupNodeModules(tmpNodeModules)
