@@ -15,17 +15,11 @@ export async function fetchProtos(
 
   log.info("Fetching protos from %s → %s", opts.repo, protoDir)
 
-  const emitter = degit(opts.repo, {
-    cache: false,
-    force: true,
-    verbose: true
-  })
-
-  emitter.on("info", info => {
-    log.debug("degit: %s", info.message)
-  })
-
-  await emitter.clone(protoDir)
+  if (opts.repo.startsWith("file://")) {
+    await copyLocalProtos(opts.repo, protoDir)
+  } else {
+    await cloneRemoteProtos(opts.repo, protoDir)
+  }
 
   const protos = walkDir(protoDir).filter(f => f.endsWith(".proto"))
 
@@ -37,6 +31,41 @@ export async function fetchProtos(
 
   log.info("Found %d .proto file(s)", protos.length)
   return protos
+}
+
+async function cloneRemoteProtos(
+  repo: string,
+  protoDir: string
+): Promise<void> {
+  const emitter = degit(repo, {
+    cache: false,
+    force: true,
+    verbose: true
+  })
+
+  emitter.on("info", info => {
+    log.debug("degit: %s", info.message)
+  })
+
+  await emitter.clone(protoDir)
+}
+
+async function copyLocalProtos(
+  repo: string,
+  protoDir: string
+): Promise<void> {
+  const localPath = Path.resolve(repo.replace(/^file:\/\//, ""))
+
+  if (!Fs.existsSync(localPath)) {
+    throw new Error(`Local path does not exist: ${localPath}`)
+  }
+
+  if (!Fs.statSync(localPath).isDirectory()) {
+    throw new Error(`Local path is not a directory: ${localPath}`)
+  }
+
+  log.debug("Copying local protos from %s → %s", localPath, protoDir)
+  Fs.cpSync(localPath, protoDir, { recursive: true })
 }
 
 function walkDir(dir: string): string[] {

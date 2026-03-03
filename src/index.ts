@@ -13,7 +13,7 @@ async function main(): Promise<void> {
       type: "string",
       demandOption: true,
       describe:
-        "GitHub repo spec: '<owner/repo>[/<subfolder>][#<branch>]'"
+        "GitHub repo spec '<owner/repo>[/<subfolder>][#<branch>]' or local path 'file://<path>'"
     })
     .option("target", {
       type: "string",

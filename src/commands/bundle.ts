@@ -5,6 +5,7 @@ import { log } from "../util/logger.js"
 import { fetchProtos } from "../steps/fetch-protos.js"
 import { runProtoc, type Target } from "../steps/run-protoc.js"
 import { generatePackage } from "../steps/generate-package.js"
+import { generateTypescript } from "../steps/generate-typescript.js"
 
 export interface BundleArgs {
   repo: string
@@ -53,6 +54,16 @@ export async function bundleCommand(args: BundleArgs): Promise<void> {
       genDir,
       repo: args.repo
     })
+
+    // Step 4 (solidity only): Generate TypeScript types alongside contracts
+    if (args.target === "solidity") {
+      await generateTypescript({
+        protoFiles,
+        protoDir,
+        tmpDir,
+        outputDir
+      })
+    }
 
     // Copy proto sources to output for reference
     const protoOutDir = Path.join(outputDir, "proto")

@@ -1,9 +1,30 @@
 import Fs from "node:fs"
 import Path from "node:path"
+import { fileURLToPath } from "node:url"
 import { log } from "../util/logger.js"
 import { renderTemplate } from "../util/templates.js"
 import { deepMerge } from "../util/merge.js"
 import type { Target } from "./run-protoc.js"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = Path.dirname(__filename)
+
+/**
+ * Read the bundler's own package.json to extract dependency versions.
+ */
+function readBundlerPackageJson(): Record<string, any> {
+  const candidates = [
+    
+    Path.join(__dirname, "../../package.json"),
+    Path.join(__dirname, "../../../package.json")
+  ]
+  for (const candidate of candidates) {
+    if (Fs.existsSync(candidate)) {
+      return JSON.parse(Fs.readFileSync(candidate, "utf-8"))
+    }
+  }
+  throw new Error("Could not find wire-protobuf-bundler package.json")
+}
 
 export interface GeneratePackageOptions {
   target: Target
@@ -198,10 +219,15 @@ async function generateSolidityPackage(
     genDir, repo
   } = opts
 
+  const bundlerPkg = readBundlerPackageJson()
+  const protobufTsRuntimeVersion =
+    bundlerPkg.dependencies?.["@protobuf-ts/runtime"] ?? "^2.9.4"
+
   const defaults: Record<string, any> = {
     packageName,
     version: packageVersion,
-    repo
+    repo,
+    protobufTsRuntimeVersion
   }
   const context = deepMerge(defaults, packageData)
 
@@ -210,6 +236,7 @@ async function generateSolidityPackage(
     "packageName",
     "version",
     "repo",
+    "protobufTsRuntimeVersion",
     "additionalFields"
   ])
   const additionalFields: Record<string, any> = {}
@@ -239,9 +266,6 @@ async function generateSolidityPackage(
 
   const packageJson = renderTemplate("solidity/package.json.hbs", context)
   Fs.writeFileSync(Path.join(outputDir, "package.json"), packageJson)
-
-  const indexMjs = renderTemplate("solidity/index.mjs.hbs", context)
-  Fs.writeFileSync(Path.join(outputDir, "index.mjs"), indexMjs)
 
   const readme = renderTemplate("solidity/README.md.hbs", context)
   Fs.writeFileSync(Path.join(outputDir, "README.md"), readme)

@@ -40,7 +40,7 @@ const PLUGIN_MAP: Record<
  *   2. System PATH
  *   3. node_modules/.bin wrapper (fallback)
  */
-function resolvePluginBin(name: string, npmPkg: string): string {
+export function resolvePluginBin(name: string, npmPkg: string): string {
   // 1. Look for the pkg binary inside the installed npm package
   const pkgBinCandidates = [
     Path.join("node_modules", ".bin", name), 
@@ -81,7 +81,7 @@ function resolvePluginBin(name: string, npmPkg: string): string {
  * relative to a root directory. If the cloned content has a "proto/" or
  * "protos/" subdirectory, that is likely the import root.
  */
-function findProtoRoot(baseDir: string): string {
+export function findProtoRoot(baseDir: string): string {
   for (const candidate of ["proto", "protos"]) {
     const dir = Path.join(baseDir, candidate)
     if (Fs.existsSync(dir) && Fs.statSync(dir).isDirectory()) {
