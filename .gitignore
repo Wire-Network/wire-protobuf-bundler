@@ -2,6 +2,7 @@
 .vscode/
 
 # Dependencies
+pnpm-lock.yaml
 node_modules
 .pnp
 .pnp.js
@@ -32,3 +33,4 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+

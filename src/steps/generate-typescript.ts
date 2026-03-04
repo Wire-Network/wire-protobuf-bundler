@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url"
 import { log } from "../util/logger.js"
 import { renderTemplate } from "../util/templates.js"
 import { resolvePluginBin, findProtoRoot } from "./run-protoc.js"
+import { removeSymLinkDirectory } from "../util/filesystem-helper.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = Path.dirname(__filename)
@@ -77,7 +78,8 @@ export async function generateTypescript(
   const { protoFiles, protoDir, tmpDir, outputDir } = opts
 
   // ── Step 1: Run protoc with protoc-gen-ts ──────────────────────────────
-
+  const outputNodeModules = Path.join(outputDir, "node_modules")
+  
   const tsOutputDir = Path.join(tmpDir, "ts")
   const tsGenDir = Path.join(tsOutputDir, "generated")
   Fs.mkdirSync(tsGenDir, { recursive: true })
@@ -179,32 +181,13 @@ export async function generateTypescript(
     )
   }
 
-  const tmpNodeModules = Path.join(outputDir, "node_modules")
   
-  const cleanupNodeModules = (nmDir: string) => {
-    try {
-    if (Fs.existsSync(nmDir)) {
-      log.info("Removing existing node_modules at %s", nmDir)
-      if (Fs.lstatSync(nmDir).isSymbolicLink()) {
-        Fs.unlinkSync(nmDir)
-        if (Fs.existsSync(nmDir)) {
-          log.warn("Symlink removal failed, attempting force delete: %s", nmDir)
-          Fs.rmSync(nmDir, { recursive: true, force: true })
-        }
-      } else {
-        Fs.rmdirSync(nmDir, { recursive: true })
-      }
-    }
-  } catch (err) {
-    log.warn(`Failed to clean up node_modules at: ${nmDir}`, err)
-  }
-  }
   
-  cleanupNodeModules(tmpNodeModules)
+  await removeSymLinkDirectory(outputNodeModules)
   
   log.info(
     "Creating temporary node_modules symlink: %s → %s",
-    tmpNodeModules,
+    outputNodeModules,
     bundlerNodeModules
   )
   // Fs.symlinkSync(bundlerNodeModules, tmpNodeModules, "junction")
@@ -224,10 +207,10 @@ export async function generateTypescript(
   } finally {
     // Always clean up the symlink
     try {
-      Fs.rmSync(tmpNodeModules, { recursive: true, force: true })
+      Fs.rmSync(outputNodeModules, { recursive: true, force: true })
       log.debug("Removed temporary node_modules symlink")
     } catch {
-      log.warn("Failed to remove temporary node_modules symlink at %s", tmpNodeModules)
+      log.warn("Failed to remove temporary node_modules symlink at %s", outputNodeModules)
     }
   }
 
