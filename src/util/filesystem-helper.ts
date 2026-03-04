@@ -46,7 +46,7 @@ export async function removeSymLinkDirectory(path: string): Promise<boolean> {
           await Fs.promises.rm(path, { recursive: true, force: true })
         }
       } else {
-        await Fs.promises.rmdir(path, { recursive: true })
+        await Fs.promises.rmdir(path)
       }
     }
   } catch (err) {
