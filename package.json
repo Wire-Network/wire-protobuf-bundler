@@ -37,7 +37,7 @@
     "@protobuf-ts/plugin": "^2.11.1",
     "@protobuf-ts/runtime": "^2.11.1",
     "@wireio/protoc-gen-solana": "^1.0.5",
-    "@wireio/protoc-gen-solidity": "^1.0.6",
+    "@wireio/protoc-gen-solidity": "^1.0.7",
     "@yao-pkg/pkg": "^6.14.1",
     "degit": "^2.8.4",
     "handlebars": "^4.7.8",
