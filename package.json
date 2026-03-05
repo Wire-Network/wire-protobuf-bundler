@@ -7,7 +7,7 @@
   "types": "lib/index.d.ts",
   "module": "dist/bundle/wire-protobuf-bundler.mjs",
   "bin": {
-    "wire-protobuf-bundler": "dist/bin/wire-protobuf-bundler.mjs"
+    "wire-protobuf-bundler": "dist/bin/wire-protobuf-bundler"
   },
   "scripts": {
     "build": "tsc -b tsconfig.json",
