@@ -1,5 +1,7 @@
 # wire-protobuf-bundler
 
+> ARCHIVED - Officially moved into [Wire-Network/wire-libraries-ts](https://github.com/Wire-Network/wire-libraries-ts)
+
 CLI tool that fetches `.proto` files from a GitHub repository, runs `protoc` with Wire plugins, and generates publishable Rust crates or npm packages.
 
 ## Prerequisites
